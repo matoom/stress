@@ -1,15 +1,18 @@
 #include "payload.h"
 
 PayLoad::PayLoad(QStringList list, QObject *parent) : QObject(parent) {
-    if(list.size() >= 3) {
+    if(list.size() >= 4) {
         if(list.at(1) != NULL)
             this->host = list.at(1);
 
         if(list.at(2) != NULL)
-            this->threads = list.at(2).toInt();
+            this->port = list.at(2).toInt();
 
         if(list.at(3) != NULL)
-            this->cycles = list.at(3).toInt();
+            this->threads = list.at(3).toInt();
+
+        if(list.at(4) != NULL)
+            this->cycles = list.at(4).toInt();
     }
 
     this->request = "GET /ads-teenused/rest/findAddressSuggest.json?query=test HTTP/1.1\r\nHost: " +
@@ -19,7 +22,6 @@ PayLoad::PayLoad(QStringList list, QObject *parent) : QObject(parent) {
 bool PayLoad::verify() {
     return this->host != NULL && this->threads != NULL && this->cycles != NULL;
 }
-
 
 int PayLoad::getThreads() {
     return this->threads;
@@ -31,6 +33,10 @@ int PayLoad::getCycles() {
 
 QString PayLoad::getHost() {
     return this->host;
+}
+
+int PayLoad::getPort() {
+    return this->port;
 }
 
 QString PayLoad::getRequest() {

@@ -15,16 +15,16 @@ int main(int argc, char *argv[]) {
 
     if(payLoad->verify()) {
         for(int i = 0; i < payLoad->getThreads(); i++){
-            qThreadPool->start(new RequestThread(payLoad));
+            qThreadPool->start(new RequestThread(i, payLoad));
         }
-        std::cout << std::endl << "All threads started .." << std::endl;
+        qDebug() << "All threads started ..";
     } else {
-        std::cout << "Parameters missing";
+        qDebug() <<"Parameters missing";
     }
 
     qThreadPool->waitForDone();
 
-    std::cout << "Done";
+    qDebug() << "Done";
 
     return a.exec();
 }

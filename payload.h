@@ -15,12 +15,14 @@ public:
     int getThreads();
     int getCycles();
     QString getHost();
+    int getPort();
     QString getRequest();
 
 private:
     int threads;
     int cycles;
     QString host;
+    int port;
     QString request;
 
 signals:

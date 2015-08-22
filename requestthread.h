@@ -11,16 +11,17 @@ class RequestThread : public QObject, public QRunnable {
     Q_OBJECT
 
 public:
-    explicit RequestThread(PayLoad *payLoad, QObject *parent = 0);
+    explicit RequestThread(int id, PayLoad *payLoad, QObject *parent = 0);
     
     void run();
 
 private:
     PayLoad *payLoad;
     Client *client;
+    int id;
 
 signals:
-    bool initRequest(QString host);
+    void initRequest(QString host, int);
     bool write(QByteArray data);
     
 public slots:

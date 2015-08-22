@@ -4,8 +4,7 @@
 #include <QObject>
 #include <QTcpSocket>
 
-class Client : public QObject
-{
+class Client : public QObject {
     Q_OBJECT
 public:
     explicit Client(QObject *parent = 0);
@@ -18,7 +17,7 @@ private:
 signals:
     
 public slots:
-    bool connectToHost(QString host);
+    void connectToHost(QString host, int port);
     bool writeData(QByteArray data);
     
 };

@@ -7,9 +7,9 @@ Client::Client(QObject *parent) : QObject(parent) {
     socket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
 }
 
-bool Client::connectToHost(QString host) {
-    socket->connectToHost(host, 80);
-    return socket->waitForConnected();
+void Client::connectToHost(QString host, int port) {
+    socket->connectToHost(host, port);
+    socket->waitForConnected();
 }
 
 bool Client::writeData(QByteArray data) {
@@ -18,6 +18,7 @@ bool Client::writeData(QByteArray data) {
         socket->flush();
         return true;
     } else {
+        qDebug() << "Unable to write to socket in" << socket->state() << "state";
         return false;
     }
 }
